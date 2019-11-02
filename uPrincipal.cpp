@@ -16,12 +16,14 @@ TTFormPrincipal *TFormPrincipal;
 
 Janela mundo(-250,-250,250,250);
 Janela vp(0,0,500,500);
+Janela clipper(-125, -125, 125, 125);
 Ponto aux;
 Poligono pol;
 Poligono polaux;
 Display display;
 bool novo = false;
 bool circulo = false;
+bool criaclip = false;
 int contId = 1;
 int cirX;
 int cirY;
@@ -151,8 +153,10 @@ void __fastcall TTFormPrincipal::btTranslacaoClick(TObject *Sender)
     dy = StrToFloat(edY->Text);
     graus = StrToFloat(etGraus->Text);
     if (lbPoligonos->ItemIndex >= 0) {
-        display.translocaDisplay(mundo,vp,dx,dy,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex,rgTipoTransformacao->ItemIndex);
+        display.translocaDisplay(mundo,vp,dx,dy,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex);
         display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
+
+
     }
     else
         ShowMessage("Escolha um Poligono!");
@@ -167,7 +171,7 @@ void __fastcall TTFormPrincipal::btRotacionaClick(TObject *Sender)
     graus = StrToFloat(etGraus->Text);
     
     if (lbPoligonos->ItemIndex >= 0) {
-        display.rotacionaDisplay(mundo,vp,graus,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex,rgTipoTransformacao->ItemIndex);
+        display.rotacionaDisplay(mundo,vp,graus,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex);
         display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
     }
     else
@@ -176,10 +180,21 @@ void __fastcall TTFormPrincipal::btRotacionaClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TTFormPrincipal::btFlexionaClick(TObject *Sender)
+void __fastcall TTFormPrincipal::btFlexionaXClick(TObject *Sender)
 {
         if (lbPoligonos->ItemIndex >= 0) {
-                display.poligonos[lbPoligonos->ItemIndex].reflexo();
+                display.poligonos[lbPoligonos->ItemIndex].reflexoX();
+                display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
+        }
+        else
+        ShowMessage("Escolha um Poligono!");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TTFormPrincipal::btFlexionaYClick(TObject *Sender)
+{
+        if (lbPoligonos->ItemIndex >= 0) {
+                display.poligonos[lbPoligonos->ItemIndex].reflexoY();
                 display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
         }
         else
@@ -195,7 +210,7 @@ void __fastcall TTFormPrincipal::btEscalonaClick(TObject *Sender)
         dy = StrToFloat(edY->Text);
 
         if (lbPoligonos->ItemIndex >= 0) {
-                display.escalonaDisplay(mundo,vp,dx,dy,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex,rgTipoTransformacao->ItemIndex);
+                display.escalonaDisplay(mundo,vp,dx,dy,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex);
                 display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
         }
         else
@@ -298,6 +313,7 @@ if (lbPoligonos->ItemIndex >= 0){
         pol.pontos.push_back(aux);
         pol.casteljau(polaux.pontos[0], polaux.pontos[1], polaux.pontos[2], 0.1);
 
+        pol.mostra(lbPontos);
         pol.id = contId++;
         display.poligonos.push_back(pol);
         pol.pontos.clear();
@@ -314,6 +330,7 @@ if (lbPoligonos->ItemIndex >= 0){
                 polaux = display.poligonos[lbPoligonos->ItemIndex];
                 pol.hermite(polaux.pontos[0], polaux.pontos[1], polaux.pontos[2], polaux.pontos[3]);
 
+                pol.mostra(lbPontos);
                 pol.id = contId++;
                 display.poligonos.push_back(pol);
                 pol.pontos.clear();
@@ -330,6 +347,7 @@ if (lbPoligonos->ItemIndex >= 0){
                         polaux = display.poligonos[lbPoligonos->ItemIndex];
                         pol.bezier(polaux.pontos[0], polaux.pontos[1], polaux.pontos[2], polaux.pontos[3]);
 
+                        pol.mostra(lbPontos);
                         pol.id = contId++;
                         display.poligonos.push_back(pol);
                         pol.pontos.clear();
@@ -368,7 +386,7 @@ if (lbPoligonos->ItemIndex >= 0){
                                         pol.bSpline(p1, p2, p3, p4);
                                 }
 
-
+                                pol.mostra(lbPontos);
                                 pol.id = contId++;
                                 display.poligonos.push_back(pol);
                                 pol.pontos.clear();
@@ -386,6 +404,7 @@ if (lbPoligonos->ItemIndex >= 0){
 
                                         pol.fwdDifferences(polaux.pontos[0], polaux.pontos[1], polaux.pontos[2], polaux.pontos[3]);
 
+                                        pol.mostra(lbPontos);
                                         pol.id = contId++;
                                         display.poligonos.push_back(pol);
                                         pol.pontos.clear();
@@ -415,4 +434,49 @@ ShowMessage("Escolha um Poligono!");
 }
 //---------------------------------------------------------------------------
 
+
+void __fastcall TTFormPrincipal::btClippingClick(TObject *Sender)
+{
+        if (criaclip==false)
+        {
+                pol.pontos.push_back(Ponto(clipper.xMin, clipper.yMax));
+                pol.pontos.push_back(Ponto(clipper.xMax, clipper.yMax));
+                pol.pontos.push_back(Ponto(clipper.xMax, clipper.xMin));
+                pol.pontos.push_back(Ponto(clipper.xMin, clipper.yMin));
+                pol.pontos.push_back(Ponto(clipper.xMin, clipper.yMax));
+
+                pol.nome = 'C';
+                
+                display.poligonos.push_back(pol);
+
+                pol.pontos.clear();
+
+                display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
+                criaclip = true;
+
+        }
+
+        int max = display.poligonos.size();
+
+            for (int i = 2; i < max; i++)
+            {
+                if (display.poligonos[i].nome != 'C')
+                {
+                    Poligono Pol;
+                    
+                    Pol=display.poligonos[i].clipping(clipper, display.poligonos.size());
+                    display.poligonos.push_back(Pol);
+                    pol.pontos.clear();
+
+
+
+
+
+                }
+            }
+
+
+            display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
+}
+//---------------------------------------------------------------------------
 

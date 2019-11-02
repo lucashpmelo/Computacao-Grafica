@@ -27,7 +27,7 @@ __published:	// IDE-managed Components
         TButton *btRotaciona;
         TEdit *etGraus;
         TLabel *Label5;
-        TButton *btFlexiona;
+        TButton *btFlexionaX;
         TButton *btEscalona;
         TRadioGroup *rgTipoDesenho;
         TButton *btCima;
@@ -42,6 +42,8 @@ __published:	// IDE-managed Components
         TLabel *Label6;
         TButton *btCurva;
         TRadioGroup *rgTipoCurva;
+        TButton *btFlexionaY;
+        TButton *btClipping;
     void __fastcall Image1MouseMove(TObject *Sender, TShiftState Shift,
         int X, int Y);
     void __fastcall Image1MouseDown(TObject *Sender,
@@ -51,7 +53,7 @@ __published:	// IDE-managed Components
     void __fastcall lbPoligonosClick(TObject *Sender);
     void __fastcall btTranslacaoClick(TObject *Sender);
         void __fastcall btRotacionaClick(TObject *Sender);
-        void __fastcall btFlexionaClick(TObject *Sender);
+        void __fastcall btFlexionaXClick(TObject *Sender);
         void __fastcall btEscalonaClick(TObject *Sender);
         void __fastcall rgTipoDesenhoClick(TObject *Sender);
         void __fastcall btCimaClick(TObject *Sender);
@@ -64,6 +66,8 @@ __published:	// IDE-managed Components
         void __fastcall btCircunferenciaClick(TObject *Sender);
         void __fastcall btCurvaClick(TObject *Sender);
         void __fastcall rgTipoCurvaClick(TObject *Sender);
+        void __fastcall btFlexionaYClick(TObject *Sender);
+        void __fastcall btClippingClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 

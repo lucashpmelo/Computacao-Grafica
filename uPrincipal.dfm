@@ -139,14 +139,14 @@ object TFormPrincipal: TTFormPrincipal
     TabOrder = 8
     Text = '0'
   end
-  object btFlexiona: TButton
+  object btFlexionaX: TButton
     Left = 128
     Top = 648
     Width = 97
     Height = 25
-    Caption = 'Flexiona'
+    Caption = 'Flexiona X'
     TabOrder = 9
-    OnClick = btFlexionaClick
+    OnClick = btFlexionaXClick
   end
   object btEscalona: TButton
     Left = 16
@@ -278,5 +278,23 @@ object TFormPrincipal: TTFormPrincipal
       'Forward Difference')
     TabOrder = 22
     OnClick = rgTipoCurvaClick
+  end
+  object btFlexionaY: TButton
+    Left = 240
+    Top = 648
+    Width = 97
+    Height = 25
+    Caption = 'Flexiona Y'
+    TabOrder = 23
+    OnClick = btFlexionaYClick
+  end
+  object btClipping: TButton
+    Left = 448
+    Top = 528
+    Width = 105
+    Height = 33
+    Caption = 'Clipping'
+    TabOrder = 24
+    OnClick = btClippingClick
   end
 end

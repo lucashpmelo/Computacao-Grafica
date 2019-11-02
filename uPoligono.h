@@ -14,6 +14,7 @@ class Poligono{
     public:
         vector <Ponto> pontos;
         int id, TipoDesenho;
+        char nome;
 
         double PontoCentralX();
         double PontoCentralY();
@@ -28,16 +29,18 @@ class Poligono{
         void escalona(Janela mundo,Janela vp,double x, double y, double *px, double *py, double Xc, double Yc,boolean homogenea);
         void rotacao(double teta, double *px, double *py, double Xc, double Yc,boolean homogenea);
         void reflexo (int op);
-        void reflexo ();
+        void Poligono::reflexoX();
+        void Poligono::reflexoY();
         void Poligono::circunferencia(Ponto aux, int r);
 
         void Poligono::casteljau(Ponto p1, Ponto p2, Ponto p3, double limite);
         void Poligono::hermite(Ponto p1, Ponto p2, Ponto p3, Ponto p4);
         void Poligono::bezier(Ponto p1, Ponto p2, Ponto p3, Ponto p4);
-        //void Poligono::bSpline2();
         void Poligono::bSpline(Ponto p1, Ponto p2, Ponto p3, Ponto p4);
-        //void Poligono::bSpline();
         void Poligono::fwdDifferences(Ponto p1, Ponto p2, Ponto p3, Ponto p4);
+
+        Poligono Poligono::clipping(Janela clip, int nPol);
+        Ponto Poligono::setPonto(Ponto aux, double x, double y);
 
 };
 

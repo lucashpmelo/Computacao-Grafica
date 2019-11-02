@@ -18,9 +18,9 @@ class Display{
         void mostra(TListBox *retorno);
         void desenha(TCanvas *canvas, Janela mundo, Janela vp, int tipoReta);
         void desenhaEixo(TCanvas *canvas, Janela mundo, Janela vp);
-        void escalonaDisplay(Janela mundo, Janela vp,double auxX,double auxY,int indice,boolean display,boolean homogenea);
-        void rotacionaDisplay(Janela mundo, Janela vp,double teta,int indice,boolean display,boolean homogenea);
-        void translocaDisplay(Janela mundo, Janela vp,double auxX,double auxY,int indice,boolean display,boolean homogenea);
+        void escalonaDisplay(Janela mundo, Janela vp,double auxX,double auxY,int indice,boolean homogenea);
+        void rotacionaDisplay(Janela mundo, Janela vp,double teta,int indice,boolean homogenea);
+        void translocaDisplay(Janela mundo, Janela vp,double auxX,double auxY,int indice,boolean homogenea);
 
 };
 #endif
