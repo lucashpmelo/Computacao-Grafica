@@ -34,6 +34,11 @@ class Poligono{
         void Poligono::casteljau(Ponto p1, Ponto p2, Ponto p3, double limite);
         void Poligono::hermite(Ponto p1, Ponto p2, Ponto p3, Ponto p4);
         void Poligono::bezier(Ponto p1, Ponto p2, Ponto p3, Ponto p4);
+        //void Poligono::bSpline2();
+        void Poligono::bSpline(Ponto p1, Ponto p2, Ponto p3, Ponto p4);
+        //void Poligono::bSpline();
+        void Poligono::fwdDifferences(Ponto p1, Ponto p2, Ponto p3, Ponto p4);
+
 };
 
 

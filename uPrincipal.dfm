@@ -273,7 +273,9 @@ object TFormPrincipal: TTFormPrincipal
     Items.Strings = (
       'Casteljau'
       'Hermite'
-      'Bezier')
+      'Bezier'
+      'B-Spline'
+      'Forward Difference')
     TabOrder = 22
     OnClick = rgTipoCurvaClick
   end

@@ -301,10 +301,16 @@ if(distancia > limite){
 }
 
 
-void Poligono::hermite(Ponto p1, Ponto p4, Ponto r1, Ponto r4){
+void Poligono::hermite(Ponto p1, Ponto p2, Ponto p3, Ponto p4){
 double xT;
 double yT;
-Ponto aux;
+Ponto aux, r1, r4;
+
+        r1.x = p2.x - p1.x;
+        r1.y = p2.y - p1.y;
+
+        r4.x = p4.x - p3.x;
+        r4.y = p4.y - p3.y;
 
         for (double t = 0; t < 1; t += (double) 0.01)
             {
@@ -332,4 +338,181 @@ Ponto aux;
                 aux.y = yT;
                 pontos.push_back(aux);
             }
+}
+
+/*void Poligono::bSpline(){
+int contador = pontos.size();
+int ancora = 0;
+
+
+        for(int i = 0; i < contador-3; i++){
+                double xT,yT;
+                Ponto p1,p2,p3,p4;
+                Ponto aux;
+
+                p1.x = pontos[ancora].x;
+                p1.y = pontos[ancora].y;
+
+                p2.x = pontos[ancora+1].x;
+                p2.y = pontos[ancora+1].y;
+
+                p3.x = pontos[ancora+2].x;
+                p3.y = pontos[ancora+2].y;
+
+                p4.x = pontos[ancora+3].x;
+                p4.y = pontos[ancora+3].y;
+
+                for(double t = 0; t < 1; t += (double) 0.01){
+                        xT = pow(t, 3) * (-p1.x / 6 + p2.x / 2 - p3.x / 2 + p4.x / 6) + pow(t, 2) * (p1.x / 2 - p2.x + p3.x / 2) + t * (-p1.x / 2 + p3.x / 2) + p1.x / 4 + 4 * p2.x / 6 + p3.x / 6;
+                        yT = pow(t, 3) * (-p1.y / 6 + p2.y / 2 - p3.y / 2 + p4.y / 6) + pow(t, 2) * (p1.y / 2 - p2.y + p3.y / 2) + t * (-p1.y / 2 + p3.y / 2) + p1.y / 4 + 4 * p2.y / 6 + p3.y / 6;
+
+                        aux.x = xT;
+                        aux.y = yT;
+                        pontos.push_back(aux);
+                }
+                ancora++;
+        }
+} */
+
+
+/*void Poligono::bSpline(Ponto p1, Ponto p2, Ponto p3, Ponto p4){
+Poligono auxPol;
+double p1x,p2x,p3x,p4x,xT,yT;
+double p1y,p2y,p3y,p4y;
+Ponto aux;
+
+
+
+        for(double t = 0; t < 1; t += (double) 0.01){
+                        xT = pow(t, 3) * (-p1.x / 6 + p2.x / 2 - p3.x / 2 + p4.x / 6) + pow(t, 2) * (p1.x / 2 - p2.x + p3.x / 2) + t * (-p1.x / 2 + p3.x / 2) + p1.x / 4 + 4 * p2.x / 6 + p3.x / 6;
+                        yT = pow(t, 3) * (-p1.y / 6 + p2.y / 2 - p3.y / 2 + p4.y / 6) + pow(t, 2) * (p1.y / 2 - p2.y + p3.y / 2) + t * (-p1.y / 2 + p3.y / 2) + p1.y / 4 + 4 * p2.y / 6 + p3.y / 6;
+
+                        aux.x = xT;
+                        aux.y = yT;
+                        pontos.push_back(aux);
+                }
+
+}*/
+
+/*void Poligono::bSpline2(){
+Poligono auxPol;
+double p1x,p2x,p3x,p4x,xT,yT;
+double p1y,p2y,p3y,p4y;
+Ponto aux;
+Ponto p1,p2,p3,p4;
+
+        p1x = p1.x;
+        p1y = p1.y;
+        p2x = p2.x;
+        p2y = p2.y;
+        p3x = p3.x;
+        p3y = p3.y;
+        p4x = p4.x;
+        p4y = p4.y;
+
+        for(double t = 0; t < 1; t += (double) 0.01){
+                        xT = pow(t, 3) * (-p1.x / 6 + p2.x / 2 - p3.x / 2 + p4.x / 6) + pow(t, 2) * (p1.x / 2 - p2.x + p3.x / 2) + t * (-p1.x / 2 + p3.x / 2) + p1.x / 4 + 4 * p2.x / 6 + p3.x / 6;
+                        yT = pow(t, 3) * (-p1.y / 6 + p2.y / 2 - p3.y / 2 + p4.y / 6) + pow(t, 2) * (p1.y / 2 - p2.y + p3.y / 2) + t * (-p1.y / 2 + p3.y / 2) + p1.y / 4 + 4 * p2.y / 6 + p3.y / 6;
+
+                        aux.x = xT;
+                        aux.y = yT;
+                        pontos.push_back(aux);
+                }
+}*/
+
+void Poligono::bSpline(Ponto p1, Ponto p2, Ponto p3, Ponto p4){
+Poligono auxPol;
+double xT,yT;
+Ponto aux;
+
+
+
+        for(double t = 0; t < 1; t += (double) 0.01){
+                        xT = p1.x + 4 * p2.x + p3.x - p1.x*t*t*t + 3 * p2.x *t*t*t -3 * p3.x * t*t*t + p4.x *t*t*t + 3*p1.x *t*t -6*p2.x *t*t + 3*p3.x*t*t - 3*p1.x *t + 3*p3.x*t;
+                        yT = p1.y + 4 * p2.y + p3.y - p1.y*t*t*t + 3 * p2.y *t*t*t -3 * p3.y * t*t*t + p4.y *t*t*t + 3*p1.y *t*t -6*p2.y *t*t + 3*p3.y*t*t - 3*p1.y *t + 3*p3.y*t;
+
+                        aux.x = xT/6;
+                        aux.y = yT/6;
+                        pontos.push_back(aux);
+                }
+
+}
+
+void Poligono::fwdDifferences(Ponto p1, Ponto p2, Ponto p3, Ponto p4){
+Ponto aux;
+double delta1 = (double)(1/100.0);
+double delta2 = (double)(pow((double)delta1, 2));
+double delta3 = (double)(pow((double)delta1, 3));
+
+double MatrizBezier[4][4] = { { -1, 3, -3, 1 },
+                              { 3, -6, 3, 0 },
+                              { -3, 3, 0, 0 },
+                              { 1, 0, 0, 0 } };
+
+double mPtsX[4][1] = { { p1.x },
+                       { p2.x },
+                       { p3.x },
+                       { p4.x }};
+
+double mPtsY[4][1] = { { p1.y },
+                       { p2.y },
+                       { p3.y },
+                       { p4.y }};
+
+double matrizX[4][4];
+double matrizY[4][4];
+
+        for(int i = 0; i < 4; i++)
+            {
+                for(int j = 0; j < 1; j++)
+                {
+                    for(int k = 0; k < 4; k++)
+                    {
+                        matrizX[i][j] += MatrizBezier[i][k] * mPtsX[k][j];
+                    }
+                }
+            }
+
+            for(int i = 0; i < 4; i++)
+            {
+                for(int j = 0; j < 1; j++)
+                {
+                    for(int k = 0; k < 4; k++)
+                    {
+                        matrizY[i][j] += MatrizBezier[i][k] * mPtsY[k][j];
+                    }
+                }
+            }
+
+double matrizDx[4][1];
+double matrizDy[4][1];
+
+            matrizDx[0][0] = matrizX[3][0];
+            matrizDx[1][0] = matrizX[0][0] * delta3 + matrizX[1][0] * delta2 + matrizX[2][0] * delta1;
+            matrizDx[2][0] = 6 * matrizX[0][0] * delta3 + 2 * matrizX[1][0] * delta2;
+            matrizDx[3][0] = 6 * matrizX[0][0] * delta3;
+
+            matrizDy[0][0] = matrizY[3][0];
+            matrizDy[1][0] = matrizY[0][0] * delta3 + matrizY[1][0] * delta2 + matrizY[2][0] * delta1;
+            matrizDy[2][0] = 6 * matrizY[0][0] * delta3 + 2 * matrizY[1][0] * delta2;
+            matrizDy[3][0] = 6 * matrizY[0][0] * delta3;
+
+            for (double t = 0; t < 100; t++)
+            {
+                matrizDx[0][0] += matrizDx[1][0];
+                matrizDx[1][0] += matrizDx[2][0];
+                matrizDx[2][0] += matrizDx[3][0];
+
+                matrizDy[0][0] += matrizDy[1][0];
+                matrizDy[1][0] += matrizDy[2][0];
+                matrizDy[2][0] += matrizDy[3][0];
+
+                aux.x = matrizDx[0][0];
+                aux.y = matrizDy[0][0];
+                pontos.push_back(aux);
+
+            }
+
+
+
 }

@@ -342,7 +342,64 @@ if (lbPoligonos->ItemIndex >= 0){
                 }
                 else
                 {
-                        ShowMessage("Escolha um Tipo de Curva!");
+                        if (rgTipoCurva->ItemIndex == 3) {
+                                polaux = display.poligonos[lbPoligonos->ItemIndex];
+                                Ponto p1,p2,p3,p4;
+
+                                for(int i = 0;i < polaux.pontos.size()-3; i++){
+
+                                        if(i==0){
+                                                p1.x = polaux.pontos[i].x+1;
+                                                p1.y = polaux.pontos[i].y+1;
+                                        }else{
+                                                p1.x = polaux.pontos[i].x;
+                                                p1.y = polaux.pontos[i].y;
+                                        }
+
+                                        p2.x = polaux.pontos[i+1].x;
+                                        p2.y = polaux.pontos[i+1].y;
+
+                                        p3.x = polaux.pontos[i+2].x;
+                                        p3.y = polaux.pontos[i+2].y;
+
+                                        p4.x = polaux.pontos[i+3].x;
+                                        p4.y = polaux.pontos[i+3].y;
+
+                                        pol.bSpline(p1, p2, p3, p4);
+                                }
+
+
+                                pol.id = contId++;
+                                display.poligonos.push_back(pol);
+                                pol.pontos.clear();
+
+                                display.mostra(lbPoligonos);
+
+                                display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
+
+
+                        }
+                        else
+                        {
+                                if (rgTipoCurva->ItemIndex == 4){
+                                        polaux = display.poligonos[lbPoligonos->ItemIndex];
+
+                                        pol.fwdDifferences(polaux.pontos[0], polaux.pontos[1], polaux.pontos[2], polaux.pontos[3]);
+
+                                        pol.id = contId++;
+                                        display.poligonos.push_back(pol);
+                                        pol.pontos.clear();
+
+                                        display.mostra(lbPoligonos);
+
+                                        display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
+                                }
+                                else{
+                                        ShowMessage("Escolha um Tipo de Curva!");
+                                }
+
+
+                        }
                 }
         }
   }
