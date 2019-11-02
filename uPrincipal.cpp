@@ -119,11 +119,12 @@ void __fastcall TTFormPrincipal::lbPoligonosClick(TObject *Sender)
 
 void __fastcall TTFormPrincipal::btTranslacaoClick(TObject *Sender)
 {
-    double dx, dy;
+    double dx, dy, graus;
     dx = StrToFloat(edX->Text);
     dy = StrToFloat(edY->Text);
+    graus = StrToFloat(etGraus->Text);
     if (lbPoligonos->ItemIndex >= 0) {
-        display.poligonos[lbPoligonos->ItemIndex].translada(dx, dy);
+        display.translocaDisplay(mundo,vp,dx,dy,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex,rgTipoTransformacao->ItemIndex);
         display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
     }
     else
@@ -139,7 +140,7 @@ void __fastcall TTFormPrincipal::btRotacionaClick(TObject *Sender)
     graus = StrToFloat(etGraus->Text);
     
     if (lbPoligonos->ItemIndex >= 0) {
-        display.poligonos[lbPoligonos->ItemIndex].rotaciona(graus);
+        display.rotacionaDisplay(mundo,vp,graus,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex,rgTipoTransformacao->ItemIndex);
         display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
     }
     else
@@ -167,7 +168,7 @@ void __fastcall TTFormPrincipal::btEscalonaClick(TObject *Sender)
         dy = StrToFloat(edY->Text);
 
         if (lbPoligonos->ItemIndex >= 0) {
-                display.poligonos[lbPoligonos->ItemIndex].escalona(dx, dy);
+                display.escalonaDisplay(mundo,vp,dx,dy,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex,rgTipoTransformacao->ItemIndex);
                 display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
         }
         else
@@ -223,7 +224,7 @@ void __fastcall TTFormPrincipal::btZoomInClick(TObject *Sender)
         mundo.yMin += 10;
         mundo.xMax -= 10;
         mundo.xMin += 10;
-        display.desenhaEixo(Image1->Canvas,mundo,vp);        
+        display.desenhaEixo(Image1->Canvas,mundo,vp);
 }
 //---------------------------------------------------------------------------
 
@@ -236,4 +237,12 @@ void __fastcall TTFormPrincipal::btZoomOutClick(TObject *Sender)
         display.desenhaEixo(Image1->Canvas,mundo,vp);        
 }
 //---------------------------------------------------------------------------
+
+
+void __fastcall TTFormPrincipal::rgTipoTransformacaoClick(TObject *Sender)
+{
+rgTipoTransformacao;
+}
+//---------------------------------------------------------------------------
+
 

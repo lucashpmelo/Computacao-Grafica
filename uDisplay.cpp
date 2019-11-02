@@ -42,3 +42,83 @@ void Display::desenhaEixo(TCanvas *canvas,Janela mundo, Janela vp){
 
 }
 
+void Display::translocaDisplay(Janela mundo, Janela vp,double auxX,double auxY, int indice,boolean display,boolean homogenea)
+{
+ double x,y;
+ if(display ==true){
+  for(int i = 2; i < poligonos.size(); i++){
+   for(int j = 0; j < poligonos[i].pontos.size(); j++){
+    x = poligonos[i].pontos[j].x;
+    y = poligonos[i].pontos[j].y;
+    poligonos[i].translada(auxX, auxY, &x, &y,homogenea);
+
+    poligonos[i].pontos[j].x = x;
+    poligonos[i].pontos[j].y = y;
+   }   //j
+  } //i
+ }//if
+ else{
+   for(int j = 0; j < poligonos[indice].pontos.size(); j++){
+    x = poligonos[indice].pontos[j].x;
+    y = poligonos[indice].pontos[j].y;
+    poligonos[indice].translada(auxX, auxY, &x, &y,homogenea);
+
+    poligonos[indice].pontos[j].x = x;
+    poligonos[indice].pontos[j].y = y;
+   }   //j
+
+
+ }
+}
+
+void Display::escalonaDisplay(Janela mundo, Janela vp,double auxX,double auxY, int indice,boolean display,boolean homogenea)
+{
+ double x,y,Xce,Yce;
+  if(display ==true){
+   for(int i = 2; i < poligonos.size(); i++){
+   Xce=poligonos[i].PontoCentralX();
+   Yce=poligonos[i].PontoCentralY();
+   for(int j = 0; j < poligonos[i].pontos.size(); j++){
+    x = poligonos[i].pontos[j].x;
+    y = poligonos[i].pontos[j].y;
+    poligonos[i].escalona(mundo,vp,auxX, auxY, &poligonos[i].pontos[j].x, &poligonos[i].pontos[j].y,Xce,Yce,homogenea);
+
+   }   //j
+  } //i
+ }else{
+   Xce=poligonos[indice].PontoCentralX();
+   Yce=poligonos[indice].PontoCentralY();
+   for(int j = 0; j < poligonos[indice].pontos.size(); j++){
+    x = poligonos[indice].pontos[j].x;
+    y = poligonos[indice].pontos[j].y;
+    poligonos[indice].escalona(mundo,vp,auxX, auxY, &poligonos[indice].pontos[j].x, &poligonos[indice].pontos[j].y,Xce,Yce,homogenea);
+
+   }   //j
+
+ }
+}
+
+void Display::rotacionaDisplay(Janela mundo, Janela vp,double teta, int indice,boolean display,boolean homogenea)
+{
+ double x,y,Xce,Yce;
+  if(display ==true){
+   for(int i = 2; i < poligonos.size(); i++){
+   Xce=poligonos[i].PontoCentralX();
+   Yce=poligonos[i].PontoCentralY();
+   for(int j = 0; j < poligonos[i].pontos.size(); j++){
+    x = poligonos[i].pontos[j].x;
+    y = poligonos[i].pontos[j].y;
+    poligonos[i].rotacao(teta, &poligonos[i].pontos[j].x, &poligonos[i].pontos[j].y,Xce,Yce,homogenea);
+   }   //j
+  } //i
+ }else{
+   Xce=poligonos[indice].PontoCentralX();
+   Yce=poligonos[indice].PontoCentralY();
+   for(int j = 0; j < poligonos[indice].pontos.size(); j++){
+    x = poligonos[indice].pontos[j].x;
+    y = poligonos[indice].pontos[j].y;
+    poligonos[indice].rotacao(teta, &poligonos[indice].pontos[j].x, &poligonos[indice].pontos[j].y,Xce,Yce,homogenea);
+   }   //j
+
+ }
+}
