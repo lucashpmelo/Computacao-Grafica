@@ -122,3 +122,60 @@ void Display::rotacionaDisplay(Janela mundo, Janela vp,double teta, int indice,b
 
  }
 }
+
+void Display::casteljauDisplay(int indice){
+   Ponto p1,p2,p3;
+
+   p1.x = poligonos[indice].pontos[0].x;
+   p1.y = poligonos[indice].pontos[0].y;
+
+   p2.x = poligonos[indice].pontos[1].x;
+   p2.y = poligonos[indice].pontos[1].y;
+
+   p3.x = poligonos[indice].pontos[2].x+1;
+   p3.y = poligonos[indice].pontos[2].y+1;
+
+   poligonos[indice+1].casteljau(p1, p2, p3, 0.1);
+}
+
+void Display::hermiteDisplay(int indice){
+   Ponto p1,p2,p3,p4,r1,r4;
+
+   p1.x = poligonos[indice].pontos[0].x;
+   p1.y = poligonos[indice].pontos[0].y;
+
+   p2.x = poligonos[indice].pontos[1].x;
+   p2.y = poligonos[indice].pontos[1].y;
+
+   p3.x = poligonos[indice].pontos[2].x;
+   p3.y = poligonos[indice].pontos[2].y;
+
+   p4.x = poligonos[indice].pontos[3].x;
+   p4.y = poligonos[indice].pontos[3].y;
+
+   r1.x = p2.x - p1.x;
+   r1.y = p2.y - p1.y;
+
+   r4.x = p4.x - p3.x;
+   r4.y = p4.y - p3.y;
+
+   poligonos[indice+1].hermite(p1, p4, r1, r4);
+}
+
+void Display::bezierDisplay(int indice){
+   Ponto p1,p2,p3,p4;
+
+   p1.x = poligonos[indice].pontos[0].x;
+   p1.y = poligonos[indice].pontos[0].y;
+
+   p2.x = poligonos[indice].pontos[1].x;
+   p2.y = poligonos[indice].pontos[1].y;
+
+   p3.x = poligonos[indice].pontos[2].x;
+   p3.y = poligonos[indice].pontos[2].y;
+
+   p4.x = poligonos[indice].pontos[3].x;
+   p4.y = poligonos[indice].pontos[3].y;
+
+   poligonos[indice+1].bezier(p1, p2, p3, p4);
+}

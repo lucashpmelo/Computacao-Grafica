@@ -79,22 +79,13 @@ object TFormPrincipal: TTFormPrincipal
     ItemHeight = 13
     TabOrder = 1
   end
-  object Button1: TButton
-    Left = 704
-    Top = 64
-    Width = 137
-    Height = 33
-    Caption = 'Tra'#231'ar pts'
-    TabOrder = 2
-    OnClick = Button1Click
-  end
   object btNovo: TButton
-    Left = 704
-    Top = 112
+    Left = 640
+    Top = 16
     Width = 137
     Height = 33
     Caption = 'novo'
-    TabOrder = 3
+    TabOrder = 2
     OnClick = btNovoClick
   end
   object lbPoligonos: TListBox
@@ -103,7 +94,7 @@ object TFormPrincipal: TTFormPrincipal
     Width = 137
     Height = 193
     ItemHeight = 13
-    TabOrder = 4
+    TabOrder = 3
     OnClick = lbPoligonosClick
   end
   object edX: TEdit
@@ -111,7 +102,7 @@ object TFormPrincipal: TTFormPrincipal
     Top = 528
     Width = 65
     Height = 21
-    TabOrder = 5
+    TabOrder = 4
     Text = '0'
   end
   object edY: TEdit
@@ -119,7 +110,7 @@ object TFormPrincipal: TTFormPrincipal
     Top = 560
     Width = 65
     Height = 21
-    TabOrder = 6
+    TabOrder = 5
     Text = '0'
   end
   object btTranslacao: TButton
@@ -128,7 +119,7 @@ object TFormPrincipal: TTFormPrincipal
     Width = 99
     Height = 25
     Caption = 'Transla'#231#227'o'
-    TabOrder = 7
+    TabOrder = 6
     OnClick = btTranslacaoClick
   end
   object btRotaciona: TButton
@@ -137,7 +128,7 @@ object TFormPrincipal: TTFormPrincipal
     Width = 99
     Height = 25
     Caption = 'Rotaciona'
-    TabOrder = 8
+    TabOrder = 7
     OnClick = btRotacionaClick
   end
   object etGraus: TEdit
@@ -145,7 +136,7 @@ object TFormPrincipal: TTFormPrincipal
     Top = 528
     Width = 65
     Height = 21
-    TabOrder = 9
+    TabOrder = 8
     Text = '0'
   end
   object btFlexiona: TButton
@@ -154,7 +145,7 @@ object TFormPrincipal: TTFormPrincipal
     Width = 97
     Height = 25
     Caption = 'Flexiona'
-    TabOrder = 10
+    TabOrder = 9
     OnClick = btFlexionaClick
   end
   object btEscalona: TButton
@@ -163,7 +154,7 @@ object TFormPrincipal: TTFormPrincipal
     Width = 97
     Height = 25
     Caption = 'Escalona'
-    TabOrder = 11
+    TabOrder = 10
     OnClick = btEscalonaClick
   end
   object rgTipoDesenho: TRadioGroup
@@ -177,7 +168,7 @@ object TFormPrincipal: TTFormPrincipal
       'DrawLine'
       'DDA'
       'Bresenham')
-    TabOrder = 12
+    TabOrder = 11
     OnClick = rgTipoDesenhoClick
   end
   object btCima: TButton
@@ -186,7 +177,7 @@ object TFormPrincipal: TTFormPrincipal
     Width = 75
     Height = 25
     Caption = 'Cima'
-    TabOrder = 13
+    TabOrder = 12
     OnClick = btCimaClick
   end
   object btBaixo: TButton
@@ -195,7 +186,7 @@ object TFormPrincipal: TTFormPrincipal
     Width = 75
     Height = 25
     Caption = 'Baixo'
-    TabOrder = 14
+    TabOrder = 13
     OnClick = btBaixoClick
   end
   object btDireita: TButton
@@ -204,7 +195,7 @@ object TFormPrincipal: TTFormPrincipal
     Width = 75
     Height = 25
     Caption = 'Direita'
-    TabOrder = 15
+    TabOrder = 14
     OnClick = btDireitaClick
   end
   object btEsquerda: TButton
@@ -213,7 +204,7 @@ object TFormPrincipal: TTFormPrincipal
     Width = 75
     Height = 25
     Caption = 'Esquerda'
-    TabOrder = 16
+    TabOrder = 15
     OnClick = btEsquerdaClick
   end
   object btZoomIn: TButton
@@ -222,7 +213,7 @@ object TFormPrincipal: TTFormPrincipal
     Width = 75
     Height = 25
     Caption = 'Zoom +'
-    TabOrder = 17
+    TabOrder = 16
     OnClick = btZoomInClick
   end
   object btZoomOut: TButton
@@ -231,7 +222,7 @@ object TFormPrincipal: TTFormPrincipal
     Width = 75
     Height = 25
     Caption = 'Zoom -'
-    TabOrder = 18
+    TabOrder = 17
     OnClick = btZoomOutClick
   end
   object rgTipoTransformacao: TRadioGroup
@@ -244,7 +235,7 @@ object TFormPrincipal: TTFormPrincipal
     Items.Strings = (
       'Normal'
       'Homogenea')
-    TabOrder = 19
+    TabOrder = 18
     OnClick = rgTipoTransformacaoClick
   end
   object etRaio: TEdit
@@ -252,7 +243,7 @@ object TFormPrincipal: TTFormPrincipal
     Top = 560
     Width = 65
     Height = 21
-    TabOrder = 20
+    TabOrder = 19
     Text = '0'
   end
   object btCircunferencia: TButton
@@ -261,7 +252,29 @@ object TFormPrincipal: TTFormPrincipal
     Width = 97
     Height = 25
     Caption = 'Circunferencia'
-    TabOrder = 21
+    TabOrder = 20
     OnClick = btCircunferenciaClick
+  end
+  object btCurva: TButton
+    Left = 792
+    Top = 16
+    Width = 137
+    Height = 33
+    Caption = 'Curva'
+    TabOrder = 21
+    OnClick = btCurvaClick
+  end
+  object rgTipoCurva: TRadioGroup
+    Left = 704
+    Top = 64
+    Width = 145
+    Height = 105
+    Caption = 'Tipos de Curva'
+    Items.Strings = (
+      'Casteljau'
+      'Hermite'
+      'Bezier')
+    TabOrder = 22
+    OnClick = rgTipoCurvaClick
   end
 end

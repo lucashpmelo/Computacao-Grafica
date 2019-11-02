@@ -21,6 +21,7 @@ class Display{
         void escalonaDisplay(Janela mundo, Janela vp,double auxX,double auxY,int indice,boolean display,boolean homogenea);
         void rotacionaDisplay(Janela mundo, Janela vp,double teta,int indice,boolean display,boolean homogenea);
         void translocaDisplay(Janela mundo, Janela vp,double auxX,double auxY,int indice,boolean display,boolean homogenea);
+
 };
 #endif
 

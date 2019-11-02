@@ -144,6 +144,8 @@ if (i > 1) {
 }//fim void
 
 
+//TRANSFORMAÇÃO
+//---------------------------------------------------------------------------------------------------------------------------------------------
 void Poligono::translada(double x, double y, double *px, double *py,boolean homogenea){
 
         double ponto[3] = {*px,*py,1};
@@ -259,3 +261,81 @@ double Poligono::PontoCentralY()
   return Yc;
 }
 
+
+void Poligono::circunferencia(Ponto aux, int r){
+   Ponto aux2 = aux;
+
+   for (int i = 0; i <= 360; i++) {
+        aux.x = r*cos(i*(PI/180)) + aux2.x;
+        aux.y = r*sin(i*(PI/180)) + aux2.y;
+        pontos.push_back(aux);
+   }
+}
+
+//CURVAS
+//---------------------------------------------------------------------------------------------------------------------------------------------
+void Poligono::casteljau(Ponto p1, Ponto p2, Ponto p3, double limite){
+double mxP12, myP12, mxP23, myP23;
+double distancia;
+
+mxP12 = (p1.x + p2.x) / 2;
+myP12 = (p1.y + p2.y) / 2;
+
+mxP23 = (p2.x + p3.x) / 2;
+myP23 = (p2.y + p3.y) / 2;
+
+Ponto nP1(mxP12,myP12);
+Ponto nP2(mxP23,myP23);
+Ponto nP3((mxP12 + mxP23)/2,(myP12 + myP23)/2);
+
+distancia = (double) sqrt(((mxP12 - mxP23) * (mxP12 - mxP23)) + ((myP12 - myP23) * (myP12 - myP23)));
+
+if(distancia > limite){
+        casteljau(p1, nP1, nP3, limite);
+        casteljau(nP3, nP2, p3, limite);
+}
+        else{
+                pontos.push_back(nP3);
+        }
+
+}
+
+
+void Poligono::hermite(Ponto p1, Ponto p2, Ponto p3, Ponto p4){
+double xT;
+double yT;
+Ponto aux, r1, r4;
+
+        r1.x = p2.x - p1.x;
+        r1.y = p2.y - p1.y;
+
+        r4.x = p4.x - p3.x;
+        r4.y = p4.y - p3.y;
+
+        for (double t = 0; t < 1; t += (double) 0.01)
+            {
+
+                xT = p1.x * (2 * t * t * t - 3 * t * t + 1) + p4.x * (-2 * t * t * t + 3 * t * t) + r1.x * (t * t * t - 2 * t * t + t) + r4.x * (t * t * t - t * t);
+                yT = p1.y * (2 * t * t * t - 3 * t * t + 1) + p4.y * (-2 * t * t * t + 3 * t * t) + r1.y * (t * t * t - 2 * t * t + t) + r4.y * (t * t * t - t * t);
+
+                aux.x = xT;
+                aux.y = yT;
+                pontos.push_back(aux);
+            }
+}
+
+void Poligono::bezier(Ponto p1, Ponto p2, Ponto p3, Ponto p4){
+double xT;
+double yT;
+Ponto aux;
+
+        for (double t = 0; t < 1; t += (double) 0.01)
+            {
+                xT = (double) (p1.x * (pow(1 - t, 3)) + p2.x * 3 * t * (pow(1 - t, 2)) + 3 * t * t * p3.x * (1 - t) + t * t * t * p4.x);
+                yT = (double) (p1.y * (pow(1 - t, 3)) + p2.y * 3 * t * (pow(1 - t, 2)) + 3 * t * t * p3.y * (1 - t) + t * t * t * p4.y);
+
+                aux.x = xT;
+                aux.y = yT;
+                pontos.push_back(aux);
+            }
+}

@@ -29,6 +29,11 @@ class Poligono{
         void rotacao(double teta, double *px, double *py, double Xc, double Yc,boolean homogenea);
         void reflexo (int op);
         void reflexo ();
+        void Poligono::circunferencia(Ponto aux, int r);
+
+        void Poligono::casteljau(Ponto p1, Ponto p2, Ponto p3, double limite);
+        void Poligono::hermite(Ponto p1, Ponto p2, Ponto p3, Ponto p4);
+        void Poligono::bezier(Ponto p1, Ponto p2, Ponto p3, Ponto p4);
 };
 
 

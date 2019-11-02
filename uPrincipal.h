@@ -17,7 +17,6 @@ __published:	// IDE-managed Components
     TLabel *Label1;
     TLabel *Label2;
     TListBox *lbPontos;
-    TButton *Button1;
         TButton *btNovo;
     TListBox *lbPoligonos;
     TEdit *edX;
@@ -41,6 +40,8 @@ __published:	// IDE-managed Components
         TEdit *etRaio;
         TButton *btCircunferencia;
         TLabel *Label6;
+        TButton *btCurva;
+        TRadioGroup *rgTipoCurva;
     void __fastcall Image1MouseMove(TObject *Sender, TShiftState Shift,
         int X, int Y);
     void __fastcall Image1MouseDown(TObject *Sender,
@@ -61,6 +62,8 @@ __published:	// IDE-managed Components
         void __fastcall btZoomOutClick(TObject *Sender);
         void __fastcall rgTipoTransformacaoClick(TObject *Sender);
         void __fastcall btCircunferenciaClick(TObject *Sender);
+        void __fastcall btCurvaClick(TObject *Sender);
+        void __fastcall rgTipoCurvaClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 
