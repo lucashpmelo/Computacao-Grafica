@@ -1,0 +1,28 @@
+//---------------------------------------------------------------------------
+#pragma hdrstop
+#include "uDisplay.h"
+
+//---------------------------------------------------------------------------
+
+#pragma package(smart_init)
+void Display::mostra(TListBox *retorno){
+    retorno->Items->Clear();
+    for(unsigned int i = 0; i < poligonos.size(); i++){
+        retorno->Items->Add(IntToStr(poligonos[i].id));
+    }
+}
+
+void Display::desenha(TCanvas *canvas, Janela mundo, Janela vp, int tipoReta){
+    canvas->Pen->Color = clBlack;
+    canvas->Pen->Width = 3; //grossura da caneta(ocupa 3 pixels)
+    canvas->Brush->Color = clWhite;
+    canvas->FillRect(Rect(0,0,500,500));
+
+    for(unsigned int i = 0; i < poligonos.size(); i++){
+        if (i > 1){
+            canvas->Pen->Color = clRed;
+        }
+        poligonos[i].desenha(canvas, mundo, vp, tipoReta);
+    }
+}
+
