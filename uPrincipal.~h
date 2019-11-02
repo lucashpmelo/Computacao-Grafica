@@ -38,6 +38,9 @@ __published:	// IDE-managed Components
         TButton *btZoomIn;
         TButton *btZoomOut;
         TRadioGroup *rgTipoTransformacao;
+        TEdit *etRaio;
+        TButton *btCircunferencia;
+        TLabel *Label6;
     void __fastcall Image1MouseMove(TObject *Sender, TShiftState Shift,
         int X, int Y);
     void __fastcall Image1MouseDown(TObject *Sender,
@@ -57,6 +60,7 @@ __published:	// IDE-managed Components
         void __fastcall btZoomInClick(TObject *Sender);
         void __fastcall btZoomOutClick(TObject *Sender);
         void __fastcall rgTipoTransformacaoClick(TObject *Sender);
+        void __fastcall btCircunferenciaClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 

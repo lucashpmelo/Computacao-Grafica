@@ -1,6 +1,7 @@
 //---------------------------------------------------------------------------
 
 #include <vcl.h>
+#include <math.h>
 #pragma hdrstop
 
 #include "uJanela.h"
@@ -16,11 +17,18 @@ TTFormPrincipal *TFormPrincipal;
 Janela mundo(-250,-250,250,250);
 Janela vp(0,0,500,500);
 Ponto aux;
+Ponto guarda;
 Poligono pol;
 Display display;
 bool novo = false;
+bool circulo = false;
 int contId = 1;
+int cirX;
+int cirY;
+int cirP;
+int i;
 int TipoDesenho=0;
+double eXe;
 //---------------------------------------------------------------------------
 __fastcall TTFormPrincipal::TTFormPrincipal(TComponent* Owner)
         : TForm(Owner)
@@ -84,6 +92,31 @@ void __fastcall TTFormPrincipal::Image1MouseDown(TObject *Sender,
             display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
         }
     }
+    if (circulo) {
+		if (Button == mbLeft) {
+			circulo = false;
+			aux.x = xvp2mundo(X, mundo, vp);
+			aux.y = yvp2mundo(Y, mundo, vp);
+			guarda = aux;
+
+
+			for (i = 0; i < 360; i++) {
+				eXe= i;
+                                aux.x = StrToInt(etRaio->Text)*cos(eXe*(3.14159265/180)) + guarda.x;
+				aux.y = StrToInt(etRaio->Text)*sin(eXe*(3.14159265/180)) + guarda.y;
+				pol.pontos.push_back(aux);
+			}
+
+			pol.mostra(lbPontos);
+
+			pol.id = contId++;
+                        display.poligonos.push_back(pol);
+                        pol.pontos.clear();
+                        novo = false;
+                        display.mostra(lbPoligonos);
+			display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
+		}
+	}
 }
 //---------------------------------------------------------------------------
 
@@ -245,4 +278,10 @@ rgTipoTransformacao;
 }
 //---------------------------------------------------------------------------
 
+
+void __fastcall TTFormPrincipal::btCircunferenciaClick(TObject *Sender)
+{
+       circulo = true; 
+}
+//---------------------------------------------------------------------------
 

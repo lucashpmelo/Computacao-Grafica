@@ -55,6 +55,14 @@ void Poligono::desenha(TCanvas *canvas, Janela mundo, Janela vp, int tipoReta){
 
             }
         }
+        if(tipoReta == 3){
+                for(unsigned int i = 1; i < pontos.size(); i++){
+                        x1 = pontos[i].xw2vp(mundo, vp);
+                        y1 = pontos[i].yw2vp(mundo, vp);
+                        x2 = (pontos[i].xw2vp(mundo, vp) - pontos[i].yw2vp(mundo, vp)) /2;
+                DesenhaCircuferencia(canvas, x1, y1,x2,mundo, vp);
+                }
+        }
 }
 
 void Poligono::drawDDA(TCanvas *canvas, int x1, int y1, int x2, int y2) {
@@ -257,4 +265,30 @@ double Poligono::PontoCentralY()
 
   Yc = Yc/(pontos.size());
   return Yc;
+}
+
+void Poligono::DesenhaPontoCircuferenca(TCanvas *canvas,int xc,int yc,int x,int y,Janela mundo, Janela vp,int raio){
+            canvas->Ellipse(xc + raio, yc + raio, xc - raio, yc - raio);
+
+}
+
+void Poligono::DesenhaCircuferencia(TCanvas *canvas,int xc,int yc,int r,Janela mundo, Janela vp){
+        int x,y,p;
+        x = 0;
+        y = r;
+        p=1-r;
+
+        while(x<y){
+                if(p<0)
+                        x++;
+                else{
+                        x++;
+                        y--;
+                }
+                if(p<0)
+                        p+=2*x+1;
+                else
+                p+=2*(x-y)+1;
+                DesenhaPontoCircuferenca(canvas,xc,yc,x,y,mundo,vp,r);
+        }
 }

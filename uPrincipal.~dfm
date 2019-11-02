@@ -48,6 +48,13 @@ object TFormPrincipal: TTFormPrincipal
     Height = 13
     Caption = 'Graus'
   end
+  object Label6: TLabel
+    Left = 128
+    Top = 560
+    Width = 22
+    Height = 13
+    Caption = 'Raio'
+  end
   object Panel1: TPanel
     Left = 24
     Top = 16
@@ -142,8 +149,8 @@ object TFormPrincipal: TTFormPrincipal
     Text = '0'
   end
   object btFlexiona: TButton
-    Left = 352
-    Top = 608
+    Left = 128
+    Top = 648
     Width = 97
     Height = 25
     Caption = 'Flexiona'
@@ -151,8 +158,8 @@ object TFormPrincipal: TTFormPrincipal
     OnClick = btFlexionaClick
   end
   object btEscalona: TButton
-    Left = 240
-    Top = 608
+    Left = 16
+    Top = 648
     Width = 97
     Height = 25
     Caption = 'Escalona'
@@ -163,14 +170,13 @@ object TFormPrincipal: TTFormPrincipal
     Left = 544
     Top = 64
     Width = 137
-    Height = 89
+    Height = 105
     Caption = 'M'#233'todo de Desenho'
     ItemIndex = 0
     Items.Strings = (
       'DrawLine'
       'DDA'
-      'Bresenham'
-      'Circunfer'#234'ncia')
+      'Bresenham')
     TabOrder = 12
     OnClick = rgTipoDesenhoClick
   end
@@ -229,8 +235,8 @@ object TFormPrincipal: TTFormPrincipal
     OnClick = btZoomOutClick
   end
   object rgTipoTransformacao: TRadioGroup
-    Left = 232
-    Top = 528
+    Left = 240
+    Top = 520
     Width = 185
     Height = 73
     Caption = 'Transforma'#231#227'o'
@@ -240,5 +246,22 @@ object TFormPrincipal: TTFormPrincipal
       'Homogenea')
     TabOrder = 19
     OnClick = rgTipoTransformacaoClick
+  end
+  object etRaio: TEdit
+    Left = 160
+    Top = 560
+    Width = 65
+    Height = 21
+    TabOrder = 20
+    Text = '0'
+  end
+  object btCircunferencia: TButton
+    Left = 240
+    Top = 608
+    Width = 97
+    Height = 25
+    Caption = 'Circunferencia'
+    TabOrder = 21
+    OnClick = btCircunferenciaClick
   end
 end
