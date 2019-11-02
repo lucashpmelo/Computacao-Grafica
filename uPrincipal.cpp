@@ -119,7 +119,7 @@ void __fastcall TTFormPrincipal::lbPoligonosClick(TObject *Sender)
 
 void __fastcall TTFormPrincipal::btTranslacaoClick(TObject *Sender)
 {
-    /*double dx, dy;
+    double dx, dy;
     dx = StrToFloat(edX->Text);
     dy = StrToFloat(edY->Text);
     if (lbPoligonos->ItemIndex >= 0) {
@@ -127,7 +127,7 @@ void __fastcall TTFormPrincipal::btTranslacaoClick(TObject *Sender)
         display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
     }
     else
-        ShowMessage("ERROR!"); */
+        ShowMessage("Escolha um Poligono!");
 }
 //---------------------------------------------------------------------------
 
@@ -135,7 +135,7 @@ void __fastcall TTFormPrincipal::btTranslacaoClick(TObject *Sender)
 void __fastcall TTFormPrincipal::btRotacionaClick(TObject *Sender)
 {
 
-    /*double graus;
+    double graus;
     graus = StrToFloat(etGraus->Text);
     
     if (lbPoligonos->ItemIndex >= 0) {
@@ -143,26 +143,26 @@ void __fastcall TTFormPrincipal::btRotacionaClick(TObject *Sender)
         display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
     }
     else
-        ShowMessage("ERROR!");*/
+        ShowMessage("Escolha um Poligono!");
 
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TTFormPrincipal::btFlexionaClick(TObject *Sender)
 {
-        /*if (lbPoligonos->ItemIndex >= 0) {
+        if (lbPoligonos->ItemIndex >= 0) {
                 display.poligonos[lbPoligonos->ItemIndex].reflexo();
                 display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
         }
         else
-        ShowMessage("ERROR!");*/
+        ShowMessage("Escolha um Poligono!");
 }
 //---------------------------------------------------------------------------
 
 
 void __fastcall TTFormPrincipal::btEscalonaClick(TObject *Sender)
 {
-        /*double dx, dy;
+        double dx, dy;
         dx = StrToFloat(edX->Text);
         dy = StrToFloat(edY->Text);
 
@@ -171,7 +171,7 @@ void __fastcall TTFormPrincipal::btEscalonaClick(TObject *Sender)
                 display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
         }
         else
-        ShowMessage("ERROR!");   */
+        ShowMessage("Escolha um Poligono!");
 }
 //---------------------------------------------------------------------------
 
@@ -185,55 +185,55 @@ void __fastcall TTFormPrincipal::rgTipoDesenhoClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TTFormPrincipal::Button2Click(TObject *Sender)
+void __fastcall TTFormPrincipal::btCimaClick(TObject *Sender)
 {
         mundo.yMax += 10;
         mundo.yMin += 10;
-        display.desenhaEixo(Image1->Canvas,mundo,vp);        
+        display.desenhaEixo(Image1->Canvas,mundo,vp);
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TTFormPrincipal::Button3Click(TObject *Sender)
+void __fastcall TTFormPrincipal::btBaixoClick(TObject *Sender)
 {
         mundo.yMax -= 10;
         mundo.yMin -= 10;
-        display.desenhaEixo(Image1->Canvas,mundo,vp);        
+        display.desenhaEixo(Image1->Canvas,mundo,vp);
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TTFormPrincipal::Button5Click(TObject *Sender)
+void __fastcall TTFormPrincipal::btDireitaClick(TObject *Sender)
 {
         mundo.xMax += 10;
-        mundo.xMin += 10;
-        display.desenhaEixo(Image1->Canvas,mundo,vp);        
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TTFormPrincipal::Button4Click(TObject *Sender)
-{
-        mundo.xMax -= 10;
-        mundo.xMin -= 10;
-        display.desenhaEixo(Image1->Canvas,mundo,vp);        
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TTFormPrincipal::Button6Click(TObject *Sender)
-{
-        mundo.yMax -= 10;
-        mundo.yMin += 10;
-        mundo.xMax -= 10;
         mundo.xMin += 10;
         display.desenhaEixo(Image1->Canvas,mundo,vp);
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TTFormPrincipal::Button7Click(TObject *Sender)
+void __fastcall TTFormPrincipal::btEsquerdaClick(TObject *Sender)
+{
+        mundo.xMax -= 10;
+        mundo.xMin -= 10;
+        display.desenhaEixo(Image1->Canvas,mundo,vp);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TTFormPrincipal::btZoomInClick(TObject *Sender)
+{
+        mundo.yMax -= 10;
+        mundo.yMin += 10;
+        mundo.xMax -= 10;
+        mundo.xMin += 10;
+        display.desenhaEixo(Image1->Canvas,mundo,vp);        
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TTFormPrincipal::btZoomOutClick(TObject *Sender)
 {
         mundo.yMax += 10;
         mundo.yMin -= 10;
         mundo.xMax += 10;
         mundo.xMin -= 10;
-        display.desenhaEixo(Image1->Canvas,mundo,vp);
+        display.desenhaEixo(Image1->Canvas,mundo,vp);        
 }
 //---------------------------------------------------------------------------
 

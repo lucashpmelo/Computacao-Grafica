@@ -1,8 +1,8 @@
 object TFormPrincipal: TTFormPrincipal
-  Left = 391
-  Top = 23
-  Width = 948
-  Height = 739
+  Left = 272
+  Top = 10
+  Width = 951
+  Height = 743
   Caption = '1'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -26,6 +26,27 @@ object TFormPrincipal: TTFormPrincipal
     Width = 32
     Height = 13
     Caption = 'Label2'
+  end
+  object Label3: TLabel
+    Left = 24
+    Top = 528
+    Width = 7
+    Height = 13
+    Caption = 'X'
+  end
+  object Label4: TLabel
+    Left = 24
+    Top = 560
+    Width = 7
+    Height = 13
+    Caption = 'Y'
+  end
+  object Label5: TLabel
+    Left = 128
+    Top = 532
+    Width = 28
+    Height = 13
+    Caption = 'Graus'
   end
   object Panel1: TPanel
     Left = 24
@@ -78,6 +99,74 @@ object TFormPrincipal: TTFormPrincipal
     TabOrder = 4
     OnClick = lbPoligonosClick
   end
+  object edX: TEdit
+    Left = 40
+    Top = 528
+    Width = 65
+    Height = 21
+    TabOrder = 5
+    Text = '0'
+  end
+  object edY: TEdit
+    Left = 40
+    Top = 560
+    Width = 65
+    Height = 21
+    TabOrder = 6
+    Text = '0'
+  end
+  object btTranslacao: TButton
+    Left = 16
+    Top = 592
+    Width = 99
+    Height = 25
+    Caption = 'Transla'#231#227'o'
+    TabOrder = 7
+    OnClick = btTranslacaoClick
+  end
+  object btRotaciona: TButton
+    Left = 128
+    Top = 592
+    Width = 99
+    Height = 25
+    Caption = 'Rotaciona'
+    TabOrder = 8
+    OnClick = btRotacionaClick
+  end
+  object etGraus: TEdit
+    Left = 160
+    Top = 528
+    Width = 65
+    Height = 21
+    TabOrder = 9
+    Text = '0'
+  end
+  object btFlexiona: TButton
+    Left = 16
+    Top = 632
+    Width = 97
+    Height = 25
+    Caption = 'Flexiona'
+    TabOrder = 10
+    OnClick = btFlexionaClick
+  end
+  object btEscalona: TButton
+    Left = 240
+    Top = 592
+    Width = 97
+    Height = 25
+    Caption = 'Escalona'
+    TabOrder = 11
+    OnClick = btEscalonaClick
+  end
+  object btPontoCentral: TButton
+    Left = 128
+    Top = 632
+    Width = 97
+    Height = 25
+    Caption = 'Ponto Central'
+    TabOrder = 12
+  end
   object rgTipoDesenho: TRadioGroup
     Left = 544
     Top = 64
@@ -89,61 +178,61 @@ object TFormPrincipal: TTFormPrincipal
       'DrawLine'
       'DDA'
       'Bresenham')
-    TabOrder = 5
+    TabOrder = 13
     OnClick = rgTipoDesenhoClick
   end
-  object Button2: TButton
+  object btCima: TButton
     Left = 608
     Top = 392
     Width = 75
     Height = 25
     Caption = 'Cima'
-    TabOrder = 6
-    OnClick = Button2Click
+    TabOrder = 14
+    OnClick = btCimaClick
   end
-  object Button3: TButton
+  object btBaixo: TButton
     Left = 608
     Top = 456
     Width = 75
     Height = 25
     Caption = 'Baixo'
-    TabOrder = 7
-    OnClick = Button3Click
+    TabOrder = 15
+    OnClick = btBaixoClick
   end
-  object Button4: TButton
-    Left = 536
-    Top = 424
-    Width = 75
-    Height = 25
-    Caption = 'Esquerda'
-    TabOrder = 8
-    OnClick = Button4Click
-  end
-  object Button5: TButton
-    Left = 680
+  object btDireita: TButton
+    Left = 688
     Top = 424
     Width = 75
     Height = 25
     Caption = 'Direita'
-    TabOrder = 9
-    OnClick = Button5Click
+    TabOrder = 16
+    OnClick = btDireitaClick
   end
-  object Button6: TButton
-    Left = 816
+  object btEsquerda: TButton
+    Left = 528
+    Top = 424
+    Width = 75
+    Height = 25
+    Caption = 'Esquerda'
+    TabOrder = 17
+    OnClick = btEsquerdaClick
+  end
+  object btZoomIn: TButton
+    Left = 784
     Top = 400
     Width = 75
     Height = 25
     Caption = 'Zoom +'
-    TabOrder = 10
-    OnClick = Button6Click
+    TabOrder = 18
+    OnClick = btZoomInClick
   end
-  object Button7: TButton
-    Left = 816
+  object btZoomOut: TButton
+    Left = 784
     Top = 448
     Width = 75
     Height = 25
     Caption = 'Zoom -'
-    TabOrder = 11
-    OnClick = Button7Click
+    TabOrder = 19
+    OnClick = btZoomOutClick
   end
 end

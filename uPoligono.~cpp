@@ -57,25 +57,6 @@ void Poligono::desenha(TCanvas *canvas, Janela mundo, Janela vp, int tipoReta){
         }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 void Poligono::translada (double dx, double dy) {
     for(unsigned int i = 0; i < pontos.size(); i++){
         pontos[i].translada(dx, dy);
@@ -122,7 +103,7 @@ x = x1 + 0.5 * SIGN (deltax);
 y = y1 + 0.5 * SIGN (deltay);
 
 for (int i = 0; i < length; i++) {
-        canvas->Pixels[FLOOR(x)][FLOOR(y)] = clBlue;
+        canvas->Pixels[x][y] = clBlue;
         x += deltax;
         y += deltay;
 }
@@ -169,7 +150,7 @@ if (i > 1) {
         erro = 2 * deltay - deltax;
 
         for (i = 0; i < deltax; i++) {
-                canvas->Pixels[x][y] = clYellow;
+                canvas->Pixels[x][y] = clBlack;
 
                 while (erro >= 0) {
                         if (interchange){

@@ -57,25 +57,6 @@ void Poligono::desenha(TCanvas *canvas, Janela mundo, Janela vp, int tipoReta){
         }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 void Poligono::translada (double dx, double dy) {
     for(unsigned int i = 0; i < pontos.size(); i++){
         pontos[i].translada(dx, dy);
@@ -185,7 +166,7 @@ if (i > 1) {
                         x = x + signalx;
                 }
                 erro = erro+2 * deltay;
-        }//encerra for
-    }//encerra for
-  }//encerra if
-}//encerra funcao
+        }//fim for
+    }//fim for
+  }//fim if
+}//fim void
