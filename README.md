@@ -1,28 +1,28 @@
 # Computação Gráfica
 
-##Trabalho da disciplina de Computação Gráfica do Curso de Ciência da Computação Utfpr campus Medianeira.
+**Trabalho da disciplina de Computação Gráfica do Curso de Ciência da Computação Utfpr campus Medianeira.**
 
-######Desenvolvido utilizando CBuilder.
+**Desenvolvido utilizando CBuilder.**
 
-**Retas**
-	DrawLine
-	DDA
-	Bresenham
+1. Retas
+   - DrawLine
+   - DDA
+   - Bresenham
 
-**Zoom**
+2. Zoom
 
-**Transformação Normal e Homogênea(2D/3D)**
-	Translada
-	Escalona
-	Rotação
-	Reflexo X e Y
-	Circunferência
+3. Transformação Normal e Homogênea(2D/3D)
+   - Translada
+   - Escalona
+   - Rotação
+   - Reflexo X e Y
+   - Circunferência
 
-**Clipping**
+4. Clipping
 
-**Curvas**
-	Casteljau
-	Hermite
-	Bezier
-	B-Spline
-	Forward Difference
+5. Curvas
+   - Casteljau
+   - Hermite
+   - Bezier
+   - B-Spline
+   - Forward Difference
