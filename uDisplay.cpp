@@ -22,6 +22,12 @@ void Display::desenha(TCanvas *canvas, Janela mundo, Janela vp, int tipoReta){
         if (i > 1){
             canvas->Pen->Color = clRed;
         }
+        if(poligonos[i].nome == 'A'){
+                canvas->Pen->Width = 6;
+        }
+        else{
+                canvas->Pen->Width = 3;
+        }
         poligonos[i].desenha(canvas, mundo, vp, tipoReta);
     }
 }
@@ -56,6 +62,22 @@ void Display::translocaDisplay(Janela mundo, Janela vp,double auxX,double auxY, 
 
 }
 
+void Display::transloca3DDisplay(Janela mundo, Janela vp,double auxX,double auxY,double auxZ, int indice,boolean homogenea)
+{
+ double x,y,z;
+ for(int j = 0; j < poligonos[indice].pontos.size(); j++){
+    x = poligonos[indice].pontos[j].x;
+    y = poligonos[indice].pontos[j].y;
+    z = poligonos[indice].pontos[j].z;
+    poligonos[indice].translada(auxX, auxY, auxZ, &x, &y, &z, homogenea);
+
+    poligonos[indice].pontos[j].x = x;
+    poligonos[indice].pontos[j].y = y;
+    poligonos[indice].pontos[j].z = z;
+   }   //j
+
+}
+
 void Display::escalonaDisplay(Janela mundo, Janela vp,double auxX,double auxY, int indice,boolean homogenea)
 {
  double x,y,Xce,Yce;
@@ -72,6 +94,23 @@ void Display::escalonaDisplay(Janela mundo, Janela vp,double auxX,double auxY, i
 }
 
 
+void Display::escalona3DDisplay(Janela mundo, Janela vp,double auxX,double auxY,double auxZ, int indice,boolean homogenea)
+{
+ double x,y,z,Xce,Yce,Zce;
+
+  Xce=poligonos[indice].PontoCentralX();
+  Yce=poligonos[indice].PontoCentralY();
+  Zce=poligonos[indice].PontoCentralZ();
+
+   for(int j = 0; j < poligonos[indice].pontos.size(); j++){
+        x = poligonos[indice].pontos[j].x;
+        y = poligonos[indice].pontos[j].y;
+        z = poligonos[indice].pontos[j].z;
+        poligonos[indice].escalona(mundo,vp,auxX, auxY, auxZ, &poligonos[indice].pontos[j].x, &poligonos[indice].pontos[j].y, &poligonos[indice].pontos[j].z, Xce,Yce,Zce, homogenea);
+
+   }   //j
+}
+
 
 void Display::rotacionaDisplay(Janela mundo, Janela vp,double teta, int indice,boolean homogenea)
 {
@@ -83,6 +122,23 @@ void Display::rotacionaDisplay(Janela mundo, Janela vp,double teta, int indice,b
         x = poligonos[indice].pontos[j].x;
         y = poligonos[indice].pontos[j].y;
         poligonos[indice].rotacao(teta, &poligonos[indice].pontos[j].x, &poligonos[indice].pontos[j].y,Xce,Yce,homogenea);
+   }   //j
+
+
+}
+
+void Display::rotaciona3DDisplay(Janela mundo, Janela vp,double teta, int indice,boolean homogenea, int coordenada)
+{
+ double x,y,z,Xce,Yce,Zce;
+  Xce=poligonos[indice].PontoCentralX();
+  Yce=poligonos[indice].PontoCentralY();
+  Zce=poligonos[indice].PontoCentralZ();
+
+   for(int j = 0; j < poligonos[indice].pontos.size(); j++){
+        x = poligonos[indice].pontos[j].x;
+        y = poligonos[indice].pontos[j].y;
+        z = poligonos[indice].pontos[j].z;
+        poligonos[indice].rotacao(teta, &poligonos[indice].pontos[j].x, &poligonos[indice].pontos[j].y, &poligonos[indice].pontos[j].z,Xce,Yce,Zce,homogenea,coordenada);
    }   //j
 
 

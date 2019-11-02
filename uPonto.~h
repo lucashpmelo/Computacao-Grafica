@@ -11,9 +11,11 @@ class Ponto{
     public:
         double x;
         double y;
+        double z;
 
         Ponto();
         Ponto(double xN, double yN);
+        Ponto(double xN, double yN, double zN);
         int xw2vp(Janela mundo, Janela vp);
         int yw2vp(Janela mundo, Janela vp);
         AnsiString mostra();
@@ -25,6 +27,7 @@ class Ponto{
         void reflexoX();
         void reflexoY();
         void reflexoXY();
+        Ponto::regionCode(Janela clip);
 };
 
 #endif

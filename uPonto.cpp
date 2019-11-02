@@ -11,12 +11,18 @@
 
 #pragma package(smart_init)
 Ponto::Ponto(){
-    x = y = 0;
+    x = y = z = 0;
 }
 
 Ponto::Ponto(double xN, double yN){
     x = xN;
     y = yN;
+}
+
+Ponto::Ponto(double xN, double yN, double zN){
+    x = xN;
+    y = yN;
+    z = zN;
 }
     int Ponto::xw2vp(Janela mundo, Janela vp){
         return((x - mundo.xMin) / (mundo.xMax - mundo.xMin)) *
@@ -31,7 +37,7 @@ AnsiString Ponto::mostra(){
     return "(" + FloatToStr(x) + ", " + FloatToStr(y) + ")";
 }
 
-void Ponto::translada (double dx, double dy){
+/*void Ponto::translada (double dx, double dy){
     x += dx;
     y += dy;
 }
@@ -46,7 +52,7 @@ void Ponto::rotaciona (double graus){
     double aux = x;
     x = x*cos(graus) - y*sin(graus);
     y = aux*sin(graus) + y*cos(graus);
-}
+}      */
 
 void Ponto::reflexoX (){
         x *= -1;

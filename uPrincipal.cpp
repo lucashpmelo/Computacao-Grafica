@@ -88,6 +88,7 @@ void __fastcall TTFormPrincipal::Image1MouseDown(TObject *Sender,
             pol.mostra(lbPontos);
         } else {
             pol.id = contId++;
+            pol.nome = 'B';
             display.poligonos.push_back(pol);
             pol.pontos.clear();
             novo = false;
@@ -106,6 +107,7 @@ void __fastcall TTFormPrincipal::Image1MouseDown(TObject *Sender,
 
 			pol.mostra(lbPontos);
 			pol.id = contId++;
+                        pol.nome = 'B';
                         display.poligonos.push_back(pol);
                         pol.pontos.clear();
                         novo = false;
@@ -116,15 +118,57 @@ void __fastcall TTFormPrincipal::Image1MouseDown(TObject *Sender,
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TTFormPrincipal::Button1Click(TObject *Sender)
+void __fastcall TTFormPrincipal::bt3DClick(TObject *Sender)
 {
-/*
-        ListBox1->Items->Clear();
-                for(int i = 0; i < pol.pontos.size(); i++){
-                        ListBox1->Add(pol.pontos[i].mostra());
+FILE * file;
+int k,auxInt;
+Ponto aux;
+Poligono pol;
+
+        switch (rgTipoPoligono3D->ItemIndex)
+        {
+                case 0:
+                        file = fopen("3DCubo.txt", "r");
+                        break;
+                case 1:
+                        file = fopen("3DCubo2.txt", "r");
+                        break;
+                case 2:
+                        file = fopen("3DPiramide.txt", "r");
+                        break;
+                case 3:
+                        file = fopen("3DPiramide2.txt", "r");
+                        break;
         }
-        pol.mostra(lbPontos);
-*/
+
+
+        if(rgTipoPoligono3D->ItemIndex != -1){
+                fscanf(file, "%d", &k);
+
+
+                for(int i=0; i < k; i++){
+
+                        fscanf(file, "%d", &auxInt);
+                        aux.x = auxInt;
+                        fscanf(file, "%d", &auxInt);
+                        aux.y = auxInt;
+                        fscanf(file, "%d", &auxInt);
+                        aux.z = auxInt;
+                        pol.pontos.push_back(aux);
+
+                }
+
+                pol.mostra(lbPontos);
+                pol.id = contId++;
+                display.poligonos.push_back(pol);
+                pol.pontos.clear();
+
+                display.mostra(lbPoligonos);
+
+                display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
+                fclose(file);
+        }
+
 }
 //---------------------------------------------------------------------------
 
@@ -148,10 +192,9 @@ void __fastcall TTFormPrincipal::lbPoligonosClick(TObject *Sender)
 
 void __fastcall TTFormPrincipal::btTranslacaoClick(TObject *Sender)
 {
-    double dx, dy, graus;
+    double dx, dy;
     dx = StrToFloat(edX->Text);
     dy = StrToFloat(edY->Text);
-    graus = StrToFloat(etGraus->Text);
     if (lbPoligonos->ItemIndex >= 0) {
         display.translocaDisplay(mundo,vp,dx,dy,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex);
         display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
@@ -169,7 +212,7 @@ void __fastcall TTFormPrincipal::btRotacionaClick(TObject *Sender)
 
     double graus;
     graus = StrToFloat(etGraus->Text);
-    
+
     if (lbPoligonos->ItemIndex >= 0) {
         display.rotacionaDisplay(mundo,vp,graus,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex);
         display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
@@ -446,6 +489,7 @@ void __fastcall TTFormPrincipal::btClippingClick(TObject *Sender)
                 pol.pontos.push_back(Ponto(clipper.xMin, clipper.yMax));
 
                 pol.nome = 'C';
+                pol.id = contId++;
                 
                 display.poligonos.push_back(pol);
 
@@ -458,25 +502,85 @@ void __fastcall TTFormPrincipal::btClippingClick(TObject *Sender)
 
         int max = display.poligonos.size();
 
-            for (int i = 2; i < max; i++)
+            for (int i = 2; i <= max; i++)
             {
-                if (display.poligonos[i].nome != 'C')
+                if ((display.poligonos[i].nome != 'C') &&(display.poligonos[i].nome != 'A'))
                 {
                     Poligono Pol;
                     
                     Pol=display.poligonos[i].clipping(clipper, display.poligonos.size());
+                    Pol.nome = 'A';
+                    Pol.id = contId++;
                     display.poligonos.push_back(Pol);
                     pol.pontos.clear();
-
-
-
-
 
                 }
             }
 
-
+            display.mostra(lbPoligonos);
             display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
 }
 //---------------------------------------------------------------------------
+
+void __fastcall TTFormPrincipal::rgTipoPoligono3DClick(TObject *Sender)
+{
+rgTipoPoligono3D;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TTFormPrincipal::rgTipoCoordenadaClick(TObject *Sender)
+{
+rgTipoCoordenada;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TTFormPrincipal::btRotaciona3DClick(TObject *Sender)
+{
+    double graus;
+    graus = StrToFloat(etGraus->Text);
+
+    if (lbPoligonos->ItemIndex >= 0) {
+        display.rotaciona3DDisplay(mundo,vp,graus,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex,rgTipoCoordenada->ItemIndex);
+        display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
+    }
+    else
+        ShowMessage("Escolha um Poligono!");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TTFormPrincipal::btEscalona3DClick(TObject *Sender)
+{
+        double dx, dy, dz;
+        dx = StrToFloat(edX->Text);
+        dy = StrToFloat(edY->Text);
+        dz = StrToFloat(edZ->Text);
+
+        if (lbPoligonos->ItemIndex >= 0) {
+                display.escalona3DDisplay(mundo,vp,dx,dy,dz,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex);
+                display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
+        }
+        else
+        ShowMessage("Escolha um Poligono!");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TTFormPrincipal::btTranslada3DClick(TObject *Sender)
+{
+    double dx, dy, dz;
+    dx = StrToFloat(edX->Text);
+    dy = StrToFloat(edY->Text);
+    dz = StrToFloat(edZ->Text);
+    if (lbPoligonos->ItemIndex >= 0) {
+        display.transloca3DDisplay(mundo,vp,dx,dy,dz,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex);
+        display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
+
+
+    }
+    else
+        ShowMessage("Escolha um Poligono!");
+}
+//---------------------------------------------------------------------------
+
+
+
 

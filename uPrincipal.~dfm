@@ -55,6 +55,13 @@ object TFormPrincipal: TTFormPrincipal
     Height = 13
     Caption = 'Raio'
   end
+  object Label7: TLabel
+    Left = 24
+    Top = 592
+    Width = 7
+    Height = 13
+    Caption = 'Z'
+  end
   object Panel1: TPanel
     Left = 24
     Top = 16
@@ -115,7 +122,7 @@ object TFormPrincipal: TTFormPrincipal
   end
   object btTranslacao: TButton
     Left = 16
-    Top = 608
+    Top = 624
     Width = 99
     Height = 25
     Caption = 'Transla'#231#227'o'
@@ -124,7 +131,7 @@ object TFormPrincipal: TTFormPrincipal
   end
   object btRotaciona: TButton
     Left = 128
-    Top = 608
+    Top = 624
     Width = 99
     Height = 25
     Caption = 'Rotaciona'
@@ -141,7 +148,7 @@ object TFormPrincipal: TTFormPrincipal
   end
   object btFlexionaX: TButton
     Left = 128
-    Top = 648
+    Top = 664
     Width = 97
     Height = 25
     Caption = 'Flexiona X'
@@ -150,7 +157,7 @@ object TFormPrincipal: TTFormPrincipal
   end
   object btEscalona: TButton
     Left = 16
-    Top = 648
+    Top = 664
     Width = 97
     Height = 25
     Caption = 'Escalona'
@@ -248,7 +255,7 @@ object TFormPrincipal: TTFormPrincipal
   end
   object btCircunferencia: TButton
     Left = 240
-    Top = 608
+    Top = 624
     Width = 97
     Height = 25
     Caption = 'Circunferencia'
@@ -281,7 +288,7 @@ object TFormPrincipal: TTFormPrincipal
   end
   object btFlexionaY: TButton
     Left = 240
-    Top = 648
+    Top = 664
     Width = 97
     Height = 25
     Caption = 'Flexiona Y'
@@ -296,5 +303,75 @@ object TFormPrincipal: TTFormPrincipal
     Caption = 'Clipping'
     TabOrder = 24
     OnClick = btClippingClick
+  end
+  object bt3D: TButton
+    Left = 616
+    Top = 536
+    Width = 75
+    Height = 25
+    Caption = '3D'
+    TabOrder = 25
+    OnClick = bt3DClick
+  end
+  object rgTipoPoligono3D: TRadioGroup
+    Left = 720
+    Top = 520
+    Width = 73
+    Height = 65
+    Caption = 'Poligono 3D'
+    Items.Strings = (
+      'Cubo'
+      'Piramide')
+    TabOrder = 26
+    OnClick = rgTipoPoligono3DClick
+  end
+  object btRotaciona3D: TButton
+    Left = 664
+    Top = 608
+    Width = 97
+    Height = 25
+    Caption = 'Rotaciona 3D'
+    TabOrder = 27
+    OnClick = btRotaciona3DClick
+  end
+  object rgTipoCoordenada: TRadioGroup
+    Left = 808
+    Top = 520
+    Width = 73
+    Height = 65
+    Caption = 'Eixo'
+    ItemIndex = 0
+    Items.Strings = (
+      'X'
+      'Y'
+      'Z')
+    TabOrder = 28
+    OnClick = rgTipoCoordenadaClick
+  end
+  object btEscalona3D: TButton
+    Left = 552
+    Top = 648
+    Width = 97
+    Height = 25
+    Caption = 'Escalona 3D'
+    TabOrder = 29
+    OnClick = btEscalona3DClick
+  end
+  object btTranslada3D: TButton
+    Left = 552
+    Top = 608
+    Width = 97
+    Height = 25
+    Caption = 'Transla'#231#227'o 3D'
+    TabOrder = 30
+    OnClick = btTranslada3DClick
+  end
+  object edZ: TEdit
+    Left = 40
+    Top = 592
+    Width = 65
+    Height = 21
+    TabOrder = 31
+    Text = '0'
   end
 end
