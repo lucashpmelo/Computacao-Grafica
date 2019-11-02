@@ -304,7 +304,7 @@ void Poligono::rotacao(double teta, double *px, double *py,double Xc, double Yc,
         }
 }
 //ROTAÇÃO 3D
-void Poligono::rotacao(double teta, double *px, double *py, double *pz, double Xc, double Yc,double Zc, boolean homogenea, int coordenada){
+void Poligono::rotacao(double teta, double *px, double *py, double *pz, double Xc, double Yc,double Zc, boolean homogenea, int eixo){
         double x,y,z;
         double ponto[4] = {*px,*py,*pz,1};
         double angulo =  teta*PI/180;
@@ -338,20 +338,23 @@ void Poligono::rotacao(double teta, double *px, double *py, double *pz, double X
 
 for(int i=0;i<4;i++){
         for(int k=0;k<4;k++){
-                if(coordenada == 0){
-                        rotacao[i][k] = rotacaoX[i][k];
-                }else{
-                        if(coordenada == 1){
+                switch (eixo)
+                {
+                        case 0:
+                                rotacao[i][k] = rotacaoX[i][k];
+                                break;
+                        case 1:
                                 rotacao[i][k] = rotacaoY[i][k];
-                        }else{
-                                if(coordenada == 2){
-                                        rotacao[i][k] = rotacaoZ[i][k];
-                                }
-                        }
+                                break;
+                        case 2:
+                                rotacao[i][k] = rotacaoZ[i][k];
+                                break;
                 }
         }
 
 }
+
+
 
 
         if(homogenea){
@@ -378,7 +381,7 @@ for(int i=0;i<4;i++){
                 *py = resultado[1];
                 *pz = resultado[2];
         }else{
-                switch (coordenada)
+                switch (eixo)
                 {
                         case 0:
                                 //ROTAÇÃO EM TORNO DO EIXO X
@@ -581,8 +584,15 @@ double mPtsY[4][1] = { { p1.y },
                        { p3.y },
                        { p4.y }};
 
-double matrizX[4][4];
-double matrizY[4][4];
+double matrizX[4][4] = {{ 0, 0, 0, 0 },
+                        { 0, 0, 0, 0 },
+                        { 0, 0, 0, 0 },
+                        { 0, 0, 0, 0 }};
+                        
+double matrizY[4][4] = {{ 0, 0, 0, 0 },
+                        { 0, 0, 0, 0 },
+                        { 0, 0, 0, 0 },
+                        { 0, 0, 0, 0 }};
 
 //MULTIPLICA MATRIZ BEZIER * MATRIZX
         for(int i = 0; i < 4; i++)
@@ -651,7 +661,7 @@ double matrizDy[4][1];
 
 //CLIPPING
 //---------------------------------------------------------------------------------------------------------------------------------------------
-Ponto Poligono::setPonto(Ponto aux, double x, double y)
+Ponto Poligono::novoPonto(Ponto aux, double x, double y)
 {
         Ponto pto = aux;
         pto.x = x;
@@ -692,14 +702,14 @@ double inclinacao, tang, yEsq, yDir, xTopo, xFundo;
 
                         switch (clipPonto1 < clipPonto2 ? clipPonto2 : clipPonto1)
                         {
-                                case 1: aux = setPonto(aux, clip.xMin, yEsq); break;
-                                case 2: aux = setPonto(aux, clip.xMax, yDir); break;
-                                case 4: aux = setPonto(aux, xFundo, clip.yMin); break;
-                                case 5: aux = yEsq > clip.yMin ? setPonto(aux, clip.xMin, yEsq) : setPonto(aux, xFundo, clip.yMin); break;
-                                case 6: aux = xFundo < clip.xMax ? setPonto(aux, xFundo, clip.yMin) : setPonto(aux, clip.xMax, yDir); break;
-                                case 8: aux = setPonto(aux, xTopo, clip.yMax); break;
-                                case 9: aux = yEsq < clip.yMax ? setPonto(aux, clip.xMin, yEsq) : setPonto(aux, xTopo, clip.yMax); break;
-                                case 10: aux = yDir < clip.yMax ? setPonto(aux, clip.xMax, yDir) : setPonto(aux, xTopo, clip.yMax); break;
+                                case 1: aux = novoPonto(aux, clip.xMin, yEsq); break;
+                                case 2: aux = novoPonto(aux, clip.xMax, yDir); break;
+                                case 4: aux = novoPonto(aux, xFundo, clip.yMin); break;
+                                case 5: aux = yEsq > clip.yMin ? novoPonto(aux, clip.xMin, yEsq) : novoPonto(aux, xFundo, clip.yMin); break;
+                                case 6: aux = xFundo < clip.xMax ? novoPonto(aux, xFundo, clip.yMin) : novoPonto(aux, clip.xMax, yDir); break;
+                                case 8: aux = novoPonto(aux, xTopo, clip.yMax); break;
+                                case 9: aux = yEsq < clip.yMax ? novoPonto(aux, clip.xMin, yEsq) : novoPonto(aux, xTopo, clip.yMax); break;
+                                case 10: aux = yDir < clip.yMax ? novoPonto(aux, clip.xMax, yDir) : novoPonto(aux, xTopo, clip.yMax); break;
                         }
 
                     if (clipPonto1 < clipPonto2)
@@ -739,43 +749,43 @@ double inclinacao, tang, yEsq, yDir, xTopo, xFundo;
                                 {
                                 case 1:
                                         if (yEsq >= clip.yMin && yEsq <= clip.yMax)
-                                        aux = setPonto(aux, clip.xMin, yEsq);
+                                        aux = novoPonto(aux, clip.xMin, yEsq);
                                         break;
                                 case 2:
                                         if (yDir >= clip.yMin && yDir <= clip.yMax)
-                                        aux = setPonto(aux, clip.xMax, yDir);
+                                        aux = novoPonto(aux, clip.xMax, yDir);
                                         break;
                                 case 4:
                                         if (xFundo >= clip.xMin && xFundo <= clip.xMax)
-                                        aux = setPonto(aux, xFundo, clip.yMin);
+                                        aux = novoPonto(aux, xFundo, clip.yMin);
                                         break;
                                 case 5:
                                         if (xFundo >= clip.xMin && xFundo <= clip.xMax)
-                                        aux = setPonto(aux, xFundo, clip.yMin);
+                                        aux = novoPonto(aux, xFundo, clip.yMin);
                                         else if (yEsq >= clip.yMin && yEsq <= clip.yMax)
-                                        aux = setPonto(aux, clip.xMin, yEsq);
+                                        aux = novoPonto(aux, clip.xMin, yEsq);
                                         break;
                                 case 6:
                                         if (xFundo >= clip.xMin && xFundo <= clip.xMax)
-                                        aux = setPonto(aux, xFundo, clip.yMin);
+                                        aux = novoPonto(aux, xFundo, clip.yMin);
                                         else if (yDir >= clip.yMin && yDir <= clip.yMax)
-                                        aux = setPonto(aux, clip.xMax, yDir);
+                                        aux = novoPonto(aux, clip.xMax, yDir);
                                         break;
                                 case 8:
                                         if (xTopo >= clip.xMin && xTopo <= clip.xMax)
-                                        aux = setPonto(aux, xTopo, clip.yMax);
+                                        aux = novoPonto(aux, xTopo, clip.yMax);
                                         break;
                                 case 9:
                                         if (xTopo >= clip.xMin && xTopo <= clip.xMax)
-                                        aux = setPonto(aux, xTopo, clip.yMax);
+                                        aux = novoPonto(aux, xTopo, clip.yMax);
                                         else if (yEsq >= clip.yMin && yEsq <= clip.yMax)
-                                        aux = setPonto(aux, clip.xMin, yEsq);
+                                        aux = novoPonto(aux, clip.xMin, yEsq);
                                         break;
                                 case 10:
                                         if (xTopo >= clip.xMin && xTopo <= clip.xMax)
-                                        aux = setPonto(aux, xTopo, clip.yMax);
+                                        aux = novoPonto(aux, xTopo, clip.yMax);
                                         else if (yDir >= clip.yMin && yDir <= clip.yMax)
-                                        aux = setPonto(aux, clip.xMax, yDir);
+                                        aux = novoPonto(aux, clip.xMax, yDir);
                                         break;
                                 }
                                 if (aux.x == aux.y && aux.x == 0)

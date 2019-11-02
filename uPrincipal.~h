@@ -51,7 +51,7 @@ __published:	// IDE-managed Components
         TButton *bt3D;
         TRadioGroup *rgTipoPoligono3D;
         TButton *btRotaciona3D;
-        TRadioGroup *rgTipoCoordenada;
+        TRadioGroup *rgTipoEixo;
         TButton *btEscalona3D;
         TButton *btTranslada3D;
         TEdit *edZ;
@@ -82,7 +82,7 @@ __published:	// IDE-managed Components
         void __fastcall btClippingClick(TObject *Sender);
         void __fastcall rgTipoPoligono3DClick(TObject *Sender);
         void __fastcall btRotaciona3DClick(TObject *Sender);
-        void __fastcall rgTipoCoordenadaClick(TObject *Sender);
+        void __fastcall rgTipoEixoClick(TObject *Sender);
         void __fastcall btEscalona3DClick(TObject *Sender);
         void __fastcall btTranslada3DClick(TObject *Sender);
 private:	// User declarations

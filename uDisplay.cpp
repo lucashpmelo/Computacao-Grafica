@@ -127,7 +127,7 @@ void Display::rotacionaDisplay(Janela mundo, Janela vp,double teta, int indice,b
 
 }
 
-void Display::rotaciona3DDisplay(Janela mundo, Janela vp,double teta, int indice,boolean homogenea, int coordenada)
+void Display::rotaciona3DDisplay(Janela mundo, Janela vp,double teta, int indice,boolean homogenea, int eixo)
 {
  double x,y,z,Xce,Yce,Zce;
   Xce=poligonos[indice].PontoCentralX();
@@ -138,7 +138,7 @@ void Display::rotaciona3DDisplay(Janela mundo, Janela vp,double teta, int indice
         x = poligonos[indice].pontos[j].x;
         y = poligonos[indice].pontos[j].y;
         z = poligonos[indice].pontos[j].z;
-        poligonos[indice].rotacao(teta, &poligonos[indice].pontos[j].x, &poligonos[indice].pontos[j].y, &poligonos[indice].pontos[j].z,Xce,Yce,Zce,homogenea,coordenada);
+        poligonos[indice].rotacao(teta, &poligonos[indice].pontos[j].x, &poligonos[indice].pontos[j].y, &poligonos[indice].pontos[j].z,Xce,Yce,Zce,homogenea,eixo);
    }   //j
 
 

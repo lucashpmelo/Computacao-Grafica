@@ -34,25 +34,9 @@ Ponto::Ponto(double xN, double yN, double zN){
     }
 
 AnsiString Ponto::mostra(){
-    return "(" + FloatToStr(x) + ", " + FloatToStr(y) + ")";
+    return "(" + FloatToStrF(x, ffFixed, 3, 3) + ", " + FloatToStrF(y, ffFixed, 3, 3) + ", " + FloatToStrF(z, ffFixed, 3, 3) + ")";
 }
 
-/*void Ponto::translada (double dx, double dy){
-    x += dx;
-    y += dy;
-}
-
-void Ponto::escalona (double dx, double dy){
-    x *= dx;
-    y *= dy;
-}
-
-void Ponto::rotaciona (double graus){
-    graus = (graus/180)*M_PI;
-    double aux = x;
-    x = x*cos(graus) - y*sin(graus);
-    y = aux*sin(graus) + y*cos(graus);
-}      */
 
 void Ponto::reflexoX (){
         x *= -1;

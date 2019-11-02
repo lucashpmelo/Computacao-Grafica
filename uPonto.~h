@@ -27,7 +27,7 @@ class Ponto{
         void reflexoX();
         void reflexoY();
         void reflexoXY();
-        Ponto::regionCode(Janela clip);
+        int regionCode(Janela clip);
 };
 
 #endif

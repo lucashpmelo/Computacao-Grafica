@@ -18,12 +18,12 @@ class Display{
         void mostra(TListBox *retorno);
         void desenha(TCanvas *canvas, Janela mundo, Janela vp, int tipoReta);
         void desenhaEixo(TCanvas *canvas, Janela mundo, Janela vp);
-        
+        //TRANSFORMAÇÕES
         void escalonaDisplay(Janela mundo, Janela vp,double auxX,double auxY,int indice,boolean homogenea);
         void rotacionaDisplay(Janela mundo, Janela vp,double teta,int indice,boolean homogenea);
         void translocaDisplay(Janela mundo, Janela vp,double auxX,double auxY,int indice,boolean homogenea);
-
-        void rotaciona3DDisplay(Janela mundo, Janela vp,double teta, int indice,boolean homogenea,int coordenada);
+        //TRANSFORMAÇÕES 3D
+        void rotaciona3DDisplay(Janela mundo, Janela vp,double teta, int indice,boolean homogenea,int eixo);
         void escalona3DDisplay(Janela mundo, Janela vp,double auxX,double auxY,double auxZ, int indice,boolean homogenea);
         void transloca3DDisplay(Janela mundo, Janela vp,double auxX,double auxY,double auxZ, int indice,boolean homogenea);
 

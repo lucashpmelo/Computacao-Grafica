@@ -139,6 +139,8 @@ Poligono pol;
                 case 3:
                         file = fopen("3DPiramide2.txt", "r");
                         break;
+                default:
+                        ShowMessage("Escolha um Poligono 3D!");
         }
 
 
@@ -198,6 +200,7 @@ void __fastcall TTFormPrincipal::btTranslacaoClick(TObject *Sender)
     if (lbPoligonos->ItemIndex >= 0) {
         display.translocaDisplay(mundo,vp,dx,dy,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex);
         display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
+        display.poligonos[lbPoligonos->ItemIndex].mostra(lbPontos);
 
 
     }
@@ -216,6 +219,7 @@ void __fastcall TTFormPrincipal::btRotacionaClick(TObject *Sender)
     if (lbPoligonos->ItemIndex >= 0) {
         display.rotacionaDisplay(mundo,vp,graus,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex);
         display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
+        display.poligonos[lbPoligonos->ItemIndex].mostra(lbPontos);
     }
     else
         ShowMessage("Escolha um Poligono!");
@@ -228,6 +232,7 @@ void __fastcall TTFormPrincipal::btFlexionaXClick(TObject *Sender)
         if (lbPoligonos->ItemIndex >= 0) {
                 display.poligonos[lbPoligonos->ItemIndex].reflexoX();
                 display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
+                display.poligonos[lbPoligonos->ItemIndex].mostra(lbPontos);
         }
         else
         ShowMessage("Escolha um Poligono!");
@@ -239,6 +244,7 @@ void __fastcall TTFormPrincipal::btFlexionaYClick(TObject *Sender)
         if (lbPoligonos->ItemIndex >= 0) {
                 display.poligonos[lbPoligonos->ItemIndex].reflexoY();
                 display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
+                display.poligonos[lbPoligonos->ItemIndex].mostra(lbPontos);
         }
         else
         ShowMessage("Escolha um Poligono!");
@@ -255,6 +261,7 @@ void __fastcall TTFormPrincipal::btEscalonaClick(TObject *Sender)
         if (lbPoligonos->ItemIndex >= 0) {
                 display.escalonaDisplay(mundo,vp,dx,dy,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex);
                 display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
+                display.poligonos[lbPoligonos->ItemIndex].mostra(lbPontos);
         }
         else
         ShowMessage("Escolha um Poligono!");
@@ -358,6 +365,7 @@ if (lbPoligonos->ItemIndex >= 0){
 
         pol.mostra(lbPontos);
         pol.id = contId++;
+        pol.nome = 'B';
         display.poligonos.push_back(pol);
         pol.pontos.clear();
 
@@ -375,6 +383,7 @@ if (lbPoligonos->ItemIndex >= 0){
 
                 pol.mostra(lbPontos);
                 pol.id = contId++;
+                pol.nome = 'B';
                 display.poligonos.push_back(pol);
                 pol.pontos.clear();
 
@@ -392,6 +401,7 @@ if (lbPoligonos->ItemIndex >= 0){
 
                         pol.mostra(lbPontos);
                         pol.id = contId++;
+                        pol.nome = 'B';
                         display.poligonos.push_back(pol);
                         pol.pontos.clear();
 
@@ -431,6 +441,7 @@ if (lbPoligonos->ItemIndex >= 0){
 
                                 pol.mostra(lbPontos);
                                 pol.id = contId++;
+                                pol.nome = 'B';
                                 display.poligonos.push_back(pol);
                                 pol.pontos.clear();
 
@@ -449,6 +460,7 @@ if (lbPoligonos->ItemIndex >= 0){
 
                                         pol.mostra(lbPontos);
                                         pol.id = contId++;
+                                        pol.nome = 'B';
                                         display.poligonos.push_back(pol);
                                         pol.pontos.clear();
 
@@ -528,9 +540,9 @@ rgTipoPoligono3D;
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TTFormPrincipal::rgTipoCoordenadaClick(TObject *Sender)
+void __fastcall TTFormPrincipal::rgTipoEixoClick(TObject *Sender)
 {
-rgTipoCoordenada;
+rgTipoEixo;
 }
 //---------------------------------------------------------------------------
 
@@ -540,8 +552,17 @@ void __fastcall TTFormPrincipal::btRotaciona3DClick(TObject *Sender)
     graus = StrToFloat(etGraus->Text);
 
     if (lbPoligonos->ItemIndex >= 0) {
-        display.rotaciona3DDisplay(mundo,vp,graus,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex,rgTipoCoordenada->ItemIndex);
-        display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
+        if(rgTipoEixo->ItemIndex == 3){
+                display.rotaciona3DDisplay(mundo,vp,graus,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex,0);
+                display.rotaciona3DDisplay(mundo,vp,graus,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex,1);
+                display.rotaciona3DDisplay(mundo,vp,graus,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex,2);
+                display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
+                display.poligonos[lbPoligonos->ItemIndex].mostra(lbPontos);
+        }else{
+                display.rotaciona3DDisplay(mundo,vp,graus,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex,rgTipoEixo->ItemIndex);
+                display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
+                display.poligonos[lbPoligonos->ItemIndex].mostra(lbPontos);
+        }
     }
     else
         ShowMessage("Escolha um Poligono!");
@@ -558,6 +579,7 @@ void __fastcall TTFormPrincipal::btEscalona3DClick(TObject *Sender)
         if (lbPoligonos->ItemIndex >= 0) {
                 display.escalona3DDisplay(mundo,vp,dx,dy,dz,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex);
                 display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
+                display.poligonos[lbPoligonos->ItemIndex].mostra(lbPontos);
         }
         else
         ShowMessage("Escolha um Poligono!");
@@ -573,6 +595,7 @@ void __fastcall TTFormPrincipal::btTranslada3DClick(TObject *Sender)
     if (lbPoligonos->ItemIndex >= 0) {
         display.transloca3DDisplay(mundo,vp,dx,dy,dz,lbPoligonos->ItemIndex,rgTipoTransformacao->ItemIndex);
         display.desenha(Image1->Canvas, mundo, vp, rgTipoDesenho->ItemIndex);
+        display.poligonos[lbPoligonos->ItemIndex].mostra(lbPontos);
 
 
     }
